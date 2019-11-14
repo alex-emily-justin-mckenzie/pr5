@@ -9,13 +9,14 @@ Player::Player(string strParameter) {
 
 }
 
-void Player::setBoard(string arrayParameter[28][11]) {
+void Player::setBoard(vector<vector<string>> vectorParameter) {
 
 	for (int i = 0; i < 28; i++) {
 
 		for (int j = 0; j < 11; j++) {
 
-			playerBoard[i][j] = arrayParameter[i][j];
+
+			playerBoard[i][j] = vectorParameter[i][j];
 
 		}
 
@@ -23,17 +24,20 @@ void Player::setBoard(string arrayParameter[28][11]) {
 
 }
 
-void Player::getBoard(string arrayParameter[28][11]) {
+vector<vector<string> > Player::getBoard(vector<vector<string> > vectorParameter) {
+
 
 	for (int r = 0; r < 28; r++) {
 
 		for (int c = 0; c < 11; c++) {
 
-			arrayParameter[r][c] = playerBoard[r][c];
+			vectorParameter[r][c] = playerBoard[r][c];
 
 		}
 
 	}
+
+	return vectorParameter;
 
 }
 
@@ -41,6 +45,8 @@ void Player::playerDice() {
 
 	int intVariable = 0;
 	while (true) {
+
+		cout << "It\'s " << playerName << "\'s turn.\n\n";
 
 		int intVariable1 = 1 + (rand() % 6);
 		int intVariable2 = 1 + (rand() % 6);
@@ -112,6 +118,7 @@ void Player::playerTurn(int intParameter) {
 	isAvailable(intParameter);
 	isOwned(intParameter);
 	getInformation();
+	getBankrupt();
 
 }
 
@@ -427,6 +434,8 @@ void Player::setInformation(int intParameter) {
 bool Player::getBankrupt() {
 
 	if (playerMoney < 0) {
+
+		cout << "Oh no! " << playerName << " is bankrupt!\nGame over!\n\n";
 
 		return isBankrupt = true;
 

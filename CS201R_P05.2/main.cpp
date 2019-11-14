@@ -44,13 +44,28 @@ int main() {
 
 	}
 
+	vector<vector<string> > vectorVariable1;
+	for (int r = 0; r < 28; r++) {
+
+		vector<string> vectorTemp;
+		for (int c = 0; c < 11; c++) {
+
+			vectorTemp.push_back(arrayVariable[r][c]);
+			cout << arrayVariable[r][c] << endl; //
+
+		}
+
+		vectorVariable1.push_back(vectorTemp);
+
+	}
+
 	cout << "Welcome to Monopoly.\nNumber of players : ";
 
 	int intVariable;
 	cin >> intVariable;
 	cout << endl;
 
-	vector<Player*> vectorVariable;
+	vector<Player*> vectorVariable2;
 	for (int i = 1; i <= intVariable; i++) {
 
 		cout << "Player " << i << " : ";
@@ -58,38 +73,30 @@ int main() {
 		string strVariable;
 		cin >> strVariable;
 
-		vectorVariable.push_back(new Player(strVariable));
+		vectorVariable2.push_back(new Player(strVariable));
 
 	}
 
+	cout << endl;
+
 	while (true) {
 
-		for (int i = 0; i < vectorVariable.size(); i++) {
+		for (int i = 0; i < vectorVariable1.size(); i++) {
 
-			// here we need to associate the 2D array to all players
-			// can't figure it out right now, too tired
-			// all players need to have the same arrayVariable ( the procedure above )
-			// it's just a matter of doing it.
-			// modify get/set board members
+			vectorVariable2.at(i)->setBoard(vectorVariable1);
+			vectorVariable2.at(i)->playerDice();
+			vectorVariable1 = vectorVariable2.at(i)->getBoard(vectorVariable1);
 
-			// I think that the best option is to convert this 2D array to vector<vector<int>> kind of stuff,
-
-			vectorVariable.at(i)->playerDice();
-			bool boolVariable = vectorVariable.at(i)->getBankrupt();
-
-			if (boolVariable == true) {
-
-				for (int j = 0; j < vectorVariable.size(); j++) {
-
-					cout << vectorVariable.at(j)->getName()<< "\t$" << vectorVariable.at(j)->getMoney() << endl;
-
-				}
-
-				break;
-
-			}
+			bool boolVariable = vectorVariable2.at(i)->getBankrupt();
+			if (boolVariable == true) { break; }
 
 		}
+
+	}
+
+	for (int i = 0; i < vectorVariable1.size(); i++) {
+
+		cout << vectorVariable2.at(i)->getName() << "\t$" << vectorVariable2.at(i)->getMoney() << endl;
 
 	}
 

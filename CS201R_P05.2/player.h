@@ -22,8 +22,8 @@ public:
 
 	Player(string strParameter);
 
-	void setBoard(string arrayParameter[28][11]);
-	void getBoard(string arrayParameter[28][11]);
+	void setBoard(vector<vector<string> > vectorParameter);
+	vector<vector<string> > getBoard(vector<vector<string> > vectorParameter);
 
 	void playerDice();
 	void playerMove(int intParameter);
